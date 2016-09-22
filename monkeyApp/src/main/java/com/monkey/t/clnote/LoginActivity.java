@@ -38,7 +38,8 @@ import static android.Manifest.permission.READ_CONTACTS;
  * A login screen that offers login via email/password.
  */
 
-@TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+
+@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
     /**
@@ -211,7 +212,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     /**
      * Shows the progress UI and hides the login form.
      */
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
+
     private void showProgress(final boolean show) {
         // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
         // for very easy animations. If available, use these APIs to fade-in
@@ -245,6 +246,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     }
 
 
+    @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
         return new CursorLoader(this,
@@ -371,7 +373,15 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             showProgress(false);
 
             if (success) {
-                finish();
+//                finish();
+                Snackbar.make(mEmailView, R.string.permission_rationale, Snackbar.LENGTH_INDEFINITE)
+                        .setAction(android.R.string.ok, new View.OnClickListener() {
+                            @Override
+                            @TargetApi(Build.VERSION_CODES.M)
+                            public void onClick(View v) {
+                                requestPermissions(new String[]{READ_CONTACTS}, REQUEST_READ_CONTACTS);
+                            }
+                        });
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();
