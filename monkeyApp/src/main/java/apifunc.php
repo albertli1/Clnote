@@ -10,9 +10,9 @@
 // json xml plain html
 function setheader($type) {
 	// $type = "json"; 
-	$headstr = 'Content-Type:text/'.$type.';charset=utf-8';
+	$headstr1 = 'Content-Type:text/'.$type.';charset=utf-8';
 	// header('Content-Type:text/json;charset=utf-8');
-	header($headstr);
+	header($headstr1);
 }
 
 
