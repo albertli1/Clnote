@@ -74,6 +74,7 @@ function parser_action(){
 		$error_action = array("Errorn"=>"1","Msg"=>"Action: (". $action . ") not found!");
 		$error_resp = array("ErrorResp"=>$error_action);
 		error_report($error_resp);
+		exit(0);
 	}
 		
 	// echo $action_method;
@@ -138,6 +139,7 @@ function process_data($action) {
 		$error_action = array("Errorn"=>"2","Msg"=>"Action: (". $action . ") not process!");
 		$error_resp = array("ErrorResp"=>$error_action);
 		error_report($error_resp);
+		exit(0);
 	}
 
 		
