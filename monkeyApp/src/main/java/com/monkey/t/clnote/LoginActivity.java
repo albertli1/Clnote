@@ -28,6 +28,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,6 +66,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     private View mProgressView;
     private View mLoginFormView;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,6 +87,21 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             }
         });
 
+        findViewById(R.id.ivDropDown).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                Toast.makeText(LoginActivity.this, R.string.permission_rationale,Toast.LENGTH_LONG).show();
+//                Snackbar.make(mEmailView, R.string.permission_rationale, Snackbar.LENGTH_INDEFINITE)
+//                        .setAction(android.R.string.ok, new View.OnClickListener() {
+//                            @Override
+//                            @TargetApi(Build.VERSION_CODES.M)
+//                            public void onClick(View v) {
+//                                requestPermissions(new String[]{READ_CONTACTS}, REQUEST_READ_CONTACTS);
+//                            }
+//                        });
+            }
+        });
+
         Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
@@ -95,6 +112,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+        initShow();
     }
 
     private void populateAutoComplete() {
@@ -207,6 +225,25 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
         return password.length() > 4;
+    }
+
+
+    private void initShow(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
+            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
+            mLoginFormView.setVisibility(View.VISIBLE);
+            mLoginFormView.animate().setDuration(shortAnimTime).alpha(
+                    1).setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    mLoginFormView.setVisibility(View.VISIBLE);
+                }
+            });
+        } else {
+            mLoginFormView.setVisibility(View.VISIBLE);
+        }
+
+
     }
 
     /**
