@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.ContentResolver;
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.content.Loader;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -28,7 +29,8 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.monkey.t.clnote.Activity.LicenseActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -110,10 +112,38 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             }
         });
 
-        mLoginFormView = findViewById(R.id.login_form);
+        mLoginFormView = findViewById(R.id.email_login_form);
         mProgressView = findViewById(R.id.login_progress);
+
+        findViewById(R.id.tvlicense).setOnClickListener(onClickListener);
+        initShow();
+//        test();
+    }
+
+    OnClickListener onClickListener = new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()) {
+                case R.id.tvlicense :
+                    Intent intent = new Intent(LoginActivity.this,LicenseActivity.class);
+                    startActivity(intent);
+                break;
+            }
+        }
+    };
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         initShow();
     }
+
+    //    private void test(){
+//        String MYSTRING[]={"aa","bb","cc"};
+//        for(String a:MYSTRING) {
+//            Log.v("ddd",a);
+//        }
+//    }
 
     private void populateAutoComplete() {
         if (!mayRequestContacts()) {
@@ -228,10 +258,13 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     }
 
 
-    private void initShow(){
+    private void initShow() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
             int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
-            mLoginFormView.setVisibility(View.VISIBLE);
+//            int shortAnimTime = 2000;
+            mLoginFormView.setAlpha(0);
+//            mLoginFormView.setVisibility(View.VISIBLE);
+
             mLoginFormView.animate().setDuration(shortAnimTime).alpha(
                     1).setListener(new AnimatorListenerAdapter() {
                 @Override
@@ -257,7 +290,8 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
             int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
 
-            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+//            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+            mLoginFormView.setVisibility( View.VISIBLE);
             mLoginFormView.animate().setDuration(shortAnimTime).alpha(
                     show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
                 @Override
@@ -401,13 +435,14 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             }
 
             // TODO: register the new account here.
-            return true;
+            return false;
         }
 
         @Override
         protected void onPostExecute(final Boolean success) {
             mAuthTask = null;
             showProgress(false);
+
 
             if (success) {
 //                finish();

@@ -100,35 +100,35 @@ public class CustomTitleView extends View {
         int heightMode = MeasureSpec.getMode(heightMeasureSpec);
         int heightSize = MeasureSpec.getSize(heightMeasureSpec);
         int width;
-        int height ;
+        int height;
 
         Rect mBounds = new Rect();
         mTextPaint.setTextSize(mExampleDimension);
 
         mTextPaint.getTextBounds(mExampleString, 0, mExampleString.length(), mBounds);
 
-        if(widthMode == MeasureSpec.EXACTLY) {
+        if (widthMode == MeasureSpec.EXACTLY) {
             width = widthSize;
         } else {
 
             int textWidth = mBounds.width();
-            int desired =  getPaddingLeft() + textWidth + getPaddingRight();
+            int desired = getPaddingLeft() + textWidth + getPaddingRight();
             width = desired;
         }
 
-        if(heightMode == MeasureSpec.EXACTLY) {
+        if (heightMode == MeasureSpec.EXACTLY) {
             height = heightSize;
         } else {
 
-            int textHeight = mBounds.height() ;
+            int textHeight = mBounds.height();
 
-            int desireds =  getPaddingTop() + textHeight + getPaddingBottom();
+            int desireds = getPaddingTop() + textHeight + getPaddingBottom();
             height = desireds;
         }
 
 
-        Log.v("tttt",width + ":" + height);
-        setMeasuredDimension(width,height);
+        Log.v("tttt", width + ":" + height);
+        setMeasuredDimension(width, height);
 //        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 
@@ -153,9 +153,9 @@ public class CustomTitleView extends View {
         // Draw the text.
         canvas.drawText(mExampleString,
                 paddingLeft + (contentWidth - mTextWidth) / 2,
-                paddingTop + ( contentHeight + mTextHeightReal)/2 - mTextHeight - 1   ,
+                paddingTop + (contentHeight + mTextHeightReal) / 2 - mTextHeight - 1,
                 mTextPaint);
-        Log.v("ttt",contentHeight + ":" + mTextHeight);
+        Log.v("ttt", contentHeight + ":" + mTextHeight);
 
 //    canvas.drawText(mExampleString, getWidth() / 2 - mBound.width() / 2, getHeight() / 2 + mBound.height() / 2 , mTextPaint);
 //    Log.v("ttt",getHeight() + ":" + mBound.height());
@@ -216,7 +216,6 @@ public class CustomTitleView extends View {
 //        canvas.drawLine(0, bottomY, getWidth(), bottomY, bottomLinePaint);
 
     }
-
 
 
     /**

@@ -11,7 +11,6 @@ import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
 
-
 public class COpenGLRenderer implements GLSurfaceView.Renderer {
 
     private float cr, cg, cb;
@@ -24,17 +23,17 @@ public class COpenGLRenderer implements GLSurfaceView.Renderer {
 
     private FloatBuffer mQuateBuffer;
     private float[] mQuateArray = {
-            1f,1f,0f,
-            -1f,1f,0f,
-            1f,-1f,0f,
-            -1f,-1f,0f
+            1f, 1f, 0f,
+            -1f, 1f, 0f,
+            1f, -1f, 0f,
+            -1f, -1f, 0f
     };
 
     private float[] mQuadsArray = {
-            1f,1f,0f,                           //右上
-            -1f,1f,0f,                          //左上
-            -1f,-1f,0f,                         //左下
-            1f,-1f,0f                           //右下
+            1f, 1f, 0f,                           //右上
+            -1f, 1f, 0f,                          //左上
+            -1f, -1f, 0f,                         //左下
+            1f, -1f, 0f                           //右下
     };
     //从这里可以看出，我们按照逆时针的方向画图
     private FloatBuffer mQuadsBuffer;
@@ -47,29 +46,29 @@ public class COpenGLRenderer implements GLSurfaceView.Renderer {
 //    };
 
 
-    float rotateTri,rotateQuad;
-    int one=0x10000;
+    float rotateTri, rotateQuad;
+    int one = 0x10000;
 
     //三角形的一个顶点
-    private IntBuffer triggerBuffer=IntBuffer.wrap(new int[]{
-            0,one,0,     //上顶点
-            -one,-one,0,    //左顶点
-            one,-one,0    //右下点
+    private IntBuffer triggerBuffer = IntBuffer.wrap(new int[]{
+            0, one, 0,     //上顶点
+            -one, -one, 0,    //左顶点
+            one, -one, 0    //右下点
     });
 
     //正方形的四个顶点
-    private IntBuffer quateBuffer=IntBuffer.wrap(new int[]{
-            one,one,0,
-            -one,-one,0,
-            one,-one,0,
-            -one,-one,0
+    private IntBuffer quateBuffer = IntBuffer.wrap(new int[]{
+            one, one, 0,
+            -one, -one, 0,
+            one, -one, 0,
+            -one, -one, 0
     });
 
 
-    private IntBuffer colorBuffer=IntBuffer.wrap(new int[]{
-            one,0,0,one,
-            0,one,0,one,
-            0,0,one,one
+    private IntBuffer colorBuffer = IntBuffer.wrap(new int[]{
+            one, 0, 0, one,
+            0, one, 0, one,
+            0, 0, one, one
     });
 
 
@@ -98,7 +97,7 @@ public class COpenGLRenderer implements GLSurfaceView.Renderer {
     public void onSurfaceChanged(GL10 gl, int width, int height) {
         // 设置输出屏幕大小
         gl.glViewport(0, 0, width, height);
-        setAxis(gl,width,height);
+        setAxis(gl, width, height);
     }
 
 
@@ -147,16 +146,16 @@ public class COpenGLRenderer implements GLSurfaceView.Renderer {
         gl.glDrawArrays(GL10.GL_TRIANGLES, 0, 3);
     }
 
-    private void buffinit(){
+    private void buffinit() {
         mTriangleBuffer = CBufferUtil.floatToBuffer(mTriangleArray);
         mQuateBuffer = CBufferUtil.floatToBuffer(mQuateArray); //012 123
         mQuadsBuffer = CBufferUtil.floatToBuffer(mQuadsArray); //012 023
 //        mTriangleBuffer = CBufferUtil.floatToBuffer(mTriangleArray);
     }
 
-    private void otherinit(GL10 gl){
+    private void otherinit(GL10 gl) {
 
-         buffinit();
+        buffinit();
         // 启用阴影平滑
         gl.glShadeModel(GL10.GL_SMOOTH);
 
@@ -259,8 +258,6 @@ public class COpenGLRenderer implements GLSurfaceView.Renderer {
         gl.glFinish();
 
 
-
-
         /***********************/
         /* 渲染正方形 */
         // 重置当前的模型观察矩阵
@@ -347,7 +344,7 @@ public class COpenGLRenderer implements GLSurfaceView.Renderer {
     }
 
 
-    private void setAxis(GL10 gl,int width,int height) {
+    private void setAxis(GL10 gl, int width, int height) {
 //        float ratio = (float) width / height;
 //        gl.glMatrixMode(GL10.GL_PROJECTION);
 //        gl.glLoadIdentity();
